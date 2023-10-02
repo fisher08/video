@@ -1,0 +1,589 @@
+# JMH version: 1.37
+# VM version: JDK 17.0.8, OpenJDK 64-Bit Server VM, 17.0.8+7
+# VM invoker: /home/kirill/.sdkman/candidates/java/17.0.8-tem/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.rkdeep.LoopUnrollBenchmark.baseline
+
+# Run progress: 0.00% complete, ETA 00:05:00
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfAsmProfiler 
+# Profilers consume stdout and stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 1925672127.846 ops/s
+# Warmup Iteration   2: 1959037525.249 ops/s
+# Warmup Iteration   3: 1963137378.652 ops/s
+# Warmup Iteration   4: 1957864376.218 ops/s
+# Warmup Iteration   5: 1961246316.405 ops/s
+Iteration   1: 1960234699.917 ops/s
+Iteration   2: 1961066829.933 ops/s
+Iteration   3: 1965199925.157 ops/s
+Iteration   4: 1965296265.022 ops/s
+Iteration   5: 1959120259.731 ops/s
+# Processing profiler results: LinuxPerfAsmProfiler 
+
+
+Result "com.rkdeep.LoopUnrollBenchmark.baseline":
+  1962183595.952 ±(99.9%) 11096327.441 ops/s [Average]
+  (min, avg, max) = (1959120259.731, 1962183595.952, 1965296265.022), stdev = 2881680.999
+  CI (99.9%): [1951087268.511, 1973279923.393] (assumes normal distribution)
+
+Secondary result "com.rkdeep.LoopUnrollBenchmark.baseline:asm":
+PrintAssembly processed: 160555 total address lines.
+Perf output processed (skipped 59.428 seconds):
+ Column 1: cycles (50030 events)
+
+Hottest code regions (>10.00% "cycles" events):
+ Event counts are percents of total event count.
+
+....[Hottest Region 1]..............................................................................
+c2, level 4, com.rkdeep.jmh_generated.LoopUnrollBenchmark_baseline_jmhTest::baseline_thrpt_jmhStub, version 5, compile id 681 
+
+              0x00007fb788fd54d0:   movzbl 0x94(%r9),%r10d              ; implicit exception: dispatches to 0x00007fb788fd5558
+                                                                        ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
+                                                                        ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_baseline_jmhTest::baseline_thrpt_jmhStub@25 (line 123)
+              0x00007fb788fd54d8:   mov    $0x1,%ebp
+              0x00007fb788fd54dd:   test   %r10d,%r10d
+          ╭   0x00007fb788fd54e0:   jne    0x00007fb788fd550b           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+          │                                                             ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_baseline_jmhTest::baseline_thrpt_jmhStub@28 (line 123)
+          │   0x00007fb788fd54e2:   data16 nopw 0x0(%rax,%rax,1)
+          │   0x00007fb788fd54ec:   data16 data16 xchg %ax,%ax          ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
+          │                                                             ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_baseline_jmhTest::baseline_thrpt_jmhStub@31 (line 124)
+   0.42%  │↗  0x00007fb788fd54f0:   movzbl 0x94(%r9),%r10d              ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
+          ││                                                            ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_baseline_jmhTest::baseline_thrpt_jmhStub@25 (line 123)
+   0.45%  ││  0x00007fb788fd54f8:   mov    0x350(%r15),%r11
+  32.53%  ││  0x00007fb788fd54ff:   add    $0x1,%rbp                    ; ImmutableOopMap {r8=Oop r9=Oop rbx=Oop }
+          ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
+          ││                                                            ; - (reexecute) com.rkdeep.jmh_generated.LoopUnrollBenchmark_baseline_jmhTest::baseline_thrpt_jmhStub@28 (line 123)
+  31.88%  ││  0x00007fb788fd5503:   test   %eax,(%r11)                  ;   {poll}
+  33.25%  ││  0x00007fb788fd5506:   test   %r10d,%r10d
+          │╰  0x00007fb788fd5509:   je     0x00007fb788fd54f0           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
+          │                                                             ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_baseline_jmhTest::baseline_thrpt_jmhStub@31 (line 124)
+          ↘   0x00007fb788fd550b:   movabs $0x7fb79ce28dd0,%r10
+              0x00007fb788fd5515:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
+                                                                        ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_baseline_jmhTest::baseline_thrpt_jmhStub@32 (line 124)
+              0x00007fb788fd5518:   mov    %rax,0x30(%rbx)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
+                                                                        ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_baseline_jmhTest::baseline_thrpt_jmhStub@35 (line 124)
+              0x00007fb788fd551c:   mov    %r12,0x20(%rbx)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
+                                                                        ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_baseline_jmhTest::baseline_thrpt_jmhStub@41 (line 125)
+              0x00007fb788fd5520:   vcvtsi2sd %rbp,%xmm0,%xmm0
+....................................................................................................
+  98.52%  <total for region 1>
+
+....[Hottest Regions]...............................................................................
+  98.52%           c2, level 4  com.rkdeep.jmh_generated.LoopUnrollBenchmark_baseline_jmhTest::baseline_thrpt_jmhStub, version 5, compile id 681 
+   0.31%     [kernel.kallsyms]  native_write_msr 
+   0.16%     [kernel.kallsyms]  syscall_exit_to_user_mode 
+   0.09%     [kernel.kallsyms]  __entry_text_start 
+   0.07%     [kernel.kallsyms]  syscall_return_via_sysret 
+   0.05%             libjvm.so  ElfSymbolTable::lookup 
+   0.02%             libjvm.so  fileStream::write 
+   0.01%     [kernel.kallsyms]  mutex_lock 
+   0.01%     [kernel.kallsyms]  crc32c_pcl_intel_update 
+   0.01%     [kernel.kallsyms]  syscall_return_via_sysret 
+   0.01%     [kernel.kallsyms]  exit_to_user_mode_prepare 
+   0.01%     [kernel.kallsyms]  mutex_unlock 
+   0.01%     [kernel.kallsyms]  put_prev_entity 
+   0.01%     [kernel.kallsyms]  pipe_write 
+   0.01%     [kernel.kallsyms]  _copy_from_iter 
+   0.01%  ld-linux-x86-64.so.2  __tls_get_addr 
+   0.01%                [vdso]  [unknown] 
+   0.01%     [kernel.kallsyms]  __task_pid_nr_ns 
+   0.01%     [kernel.kallsyms]  __rcu_read_unlock 
+   0.01%     [kernel.kallsyms]  exit_to_user_mode_loop 
+   0.66%  <...other 280 warm regions...>
+....................................................................................................
+ 100.00%  <totals>
+
+....[Hottest Methods (after inlining)]..............................................................
+  98.52%           c2, level 4  com.rkdeep.jmh_generated.LoopUnrollBenchmark_baseline_jmhTest::baseline_thrpt_jmhStub, version 5, compile id 681 
+   0.31%     [kernel.kallsyms]  native_write_msr 
+   0.16%     [kernel.kallsyms]  syscall_exit_to_user_mode 
+   0.09%     [kernel.kallsyms]  __entry_text_start 
+   0.08%                        <unknown> 
+   0.08%     [kernel.kallsyms]  syscall_return_via_sysret 
+   0.05%             libjvm.so  ElfSymbolTable::lookup 
+   0.02%             libjvm.so  fileStream::write 
+   0.02%     [kernel.kallsyms]  pipe_write 
+   0.01%     [kernel.kallsyms]  mutex_lock 
+   0.01%     [kernel.kallsyms]  psi_group_change 
+   0.01%     [kernel.kallsyms]  crc32c_pcl_intel_update 
+   0.01%     [kernel.kallsyms]  exit_to_user_mode_prepare 
+   0.01%     [kernel.kallsyms]  mutex_unlock 
+   0.01%  ld-linux-x86-64.so.2  __tls_get_addr 
+   0.01%                [vdso]  [unknown] 
+   0.01%     [kernel.kallsyms]  ksys_write 
+   0.01%     [kernel.kallsyms]  apparmor_file_permission 
+   0.01%     [kernel.kallsyms]  _copy_from_iter 
+   0.01%     [kernel.kallsyms]  put_prev_entity 
+   0.54%  <...other 217 warm methods...>
+....................................................................................................
+ 100.00%  <totals>
+
+....[Distribution by Source]........................................................................
+  98.52%           c2, level 4
+   1.09%     [kernel.kallsyms]
+   0.19%             libjvm.so
+   0.08%                      
+   0.07%             libc.so.6
+   0.02%        hsdis-amd64.so
+   0.01%                [vdso]
+   0.01%           interpreter
+   0.01%  ld-linux-x86-64.so.2
+   0.00%                kvm.ko
+   0.00%        perf-13972.map
+....................................................................................................
+ 100.00%  <totals>
+
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.8, OpenJDK 64-Bit Server VM, 17.0.8+7
+# VM invoker: /home/kirill/.sdkman/candidates/java/17.0.8-tem/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.rkdeep.LoopUnrollBenchmark.intStride1
+
+# Run progress: 33.33% complete, ETA 00:03:44
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfAsmProfiler 
+# Profilers consume stdout and stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 2622.593 ops/s
+# Warmup Iteration   2: 2685.968 ops/s
+# Warmup Iteration   3: 2693.294 ops/s
+# Warmup Iteration   4: 2691.500 ops/s
+# Warmup Iteration   5: 2591.670 ops/s
+Iteration   1: 2580.639 ops/s
+Iteration   2: 2579.006 ops/s
+Iteration   3: 2580.988 ops/s
+Iteration   4: 2577.799 ops/s
+Iteration   5: 2577.206 ops/s
+# Processing profiler results: LinuxPerfAsmProfiler 
+
+
+Result "com.rkdeep.LoopUnrollBenchmark.intStride1":
+  2579.128 ±(99.9%) 6.448 ops/s [Average]
+  (min, avg, max) = (2577.206, 2579.128, 2580.988), stdev = 1.675
+  CI (99.9%): [2572.679, 2585.576] (assumes normal distribution)
+
+Secondary result "com.rkdeep.LoopUnrollBenchmark.intStride1:asm":
+PrintAssembly processed: 159285 total address lines.
+Perf output processed (skipped 59.632 seconds):
+ Column 1: cycles (50090 events)
+
+Hottest code regions (>10.00% "cycles" events):
+ Event counts are percents of total event count.
+
+....[Hottest Region 1]..............................................................................
+c2, level 4, com.rkdeep.jmh_generated.LoopUnrollBenchmark_intStride1_jmhTest::intStride1_thrpt_jmhStub, version 4, compile id 699 
+
+                     0x00007f17b4fd6e11:   add    $0x30,%rsp
+                     0x00007f17b4fd6e15:   pop    %rbp
+                     0x00007f17b4fd6e16:   cmp    0x348(%r15),%rsp             ;   {poll_return}
+                     0x00007f17b4fd6e1d:   ja     0x00007f17b4fd6fa4
+                     0x00007f17b4fd6e23:   ret    
+                     0x00007f17b4fd6e24:   nopl   0x0(%rax,%rax,1)
+                     0x00007f17b4fd6e2c:   data16 data16 xchg %ax,%ax
+          ↗          0x00007f17b4fd6e30:   mov    %r8d,%r9d                    ;*lload_1 {reexecute=0 rethrow=0 return_oop=0}
+          │                                                                    ; - com.rkdeep.LoopUnrollBenchmark::intStride1@10 (line 71)
+          │                                                                    ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_intStride1_jmhTest::intStride1_thrpt_jmhStub@17 (line 121)
+   5.54%  │ ↗        0x00007f17b4fd6e33:   add    0x10(%r13,%r9,8),%rsi
+   0.01%  │ │        0x00007f17b4fd6e38:   add    0x18(%r13,%r9,8),%rsi
+   5.78%  │ │        0x00007f17b4fd6e3d:   add    0x20(%r13,%r9,8),%rsi
+   5.43%  │ │        0x00007f17b4fd6e42:   add    0x28(%r13,%r9,8),%rsi
+   5.31%  │ │        0x00007f17b4fd6e47:   add    0x30(%r13,%r9,8),%rsi
+   5.20%  │ │        0x00007f17b4fd6e4c:   add    0x38(%r13,%r9,8),%rsi
+   9.53%  │ │        0x00007f17b4fd6e51:   add    0x40(%r13,%r9,8),%rsi
+   5.43%  │ │        0x00007f17b4fd6e56:   add    0x48(%r13,%r9,8),%rsi
+   5.40%  │ │        0x00007f17b4fd6e5b:   add    0x50(%r13,%r9,8),%rsi
+   5.31%  │ │        0x00007f17b4fd6e60:   add    0x58(%r13,%r9,8),%rsi
+   5.73%  │ │        0x00007f17b4fd6e65:   add    0x60(%r13,%r9,8),%rsi
+   5.41%  │ │        0x00007f17b4fd6e6a:   add    0x68(%r13,%r9,8),%rsi
+   5.39%  │ │        0x00007f17b4fd6e6f:   add    0x70(%r13,%r9,8),%rsi
+   5.49%  │ │        0x00007f17b4fd6e74:   add    0x78(%r13,%r9,8),%rsi
+  11.79%  │ │        0x00007f17b4fd6e79:   add    0x80(%r13,%r9,8),%rsi
+   6.00%  │ │        0x00007f17b4fd6e81:   add    0x88(%r13,%r9,8),%rsi        ;*ladd {reexecute=0 rethrow=0 return_oop=0}
+          │ │                                                                  ; - com.rkdeep.LoopUnrollBenchmark::intStride1@17 (line 71)
+          │ │                                                                  ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_intStride1_jmhTest::intStride1_thrpt_jmhStub@17 (line 121)
+   5.41%  │ │        0x00007f17b4fd6e89:   mov    %r9d,%r8d
+          │ │        0x00007f17b4fd6e8c:   add    $0x10,%r8d                   ;*iinc {reexecute=0 rethrow=0 return_oop=0}
+          │ │                                                                  ; - com.rkdeep.LoopUnrollBenchmark::intStride1@19 (line 69)
+          │ │                                                                  ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_intStride1_jmhTest::intStride1_thrpt_jmhStub@17 (line 121)
+          │ │        0x00007f17b4fd6e90:   cmp    %edx,%r8d
+          ╰ │        0x00007f17b4fd6e93:   jl     0x00007f17b4fd6e30           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
+            │                                                                  ; - com.rkdeep.LoopUnrollBenchmark::intStride1@7 (line 69)
+            │                                                                  ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_intStride1_jmhTest::intStride1_thrpt_jmhStub@17 (line 121)
+            │        0x00007f17b4fd6e95:   mov    0x350(%r15),%r14             ; ImmutableOopMap {rcx=Oop rdi=Oop rax=Oop rbp=Oop r13=Oop }
+            │                                                                  ;*goto {reexecute=1 rethrow=0 return_oop=0}
+            │                                                                  ; - (reexecute) com.rkdeep.LoopUnrollBenchmark::intStride1@22 (line 69)
+            │                                                                  ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_intStride1_jmhTest::intStride1_thrpt_jmhStub@17 (line 121)
+   0.00%    │        0x00007f17b4fd6e9c:   test   %eax,(%r14)                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
+            │                                                                  ; - com.rkdeep.LoopUnrollBenchmark::intStride1@22 (line 69)
+            │                                                                  ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_intStride1_jmhTest::intStride1_thrpt_jmhStub@17 (line 121)
+            │                                                                  ;   {poll}
+   0.01%    │        0x00007f17b4fd6e9f:   cmp    $0xf4231,%r8d
+           ╭│        0x00007f17b4fd6ea6:   jge    0x00007f17b4fd6ed0
+           ││        0x00007f17b4fd6ea8:   mov    %r8d,%r9d
+           ││     ↗  0x00007f17b4fd6eab:   mov    $0xf4231,%edx
+           ││     │  0x00007f17b4fd6eb0:   sub    %r9d,%edx
+           ││     │  0x00007f17b4fd6eb3:   cmp    $0xf4231,%r9d
+           ││     │  0x00007f17b4fd6eba:   cmovg  %r10d,%edx
+   0.01%   ││     │  0x00007f17b4fd6ebe:   cmp    $0x3e80,%edx
+           ││     │  0x00007f17b4fd6ec4:   cmova  %r11d,%edx
+   0.00%   ││     │  0x00007f17b4fd6ec8:   add    %r9d,%edx
+           │╰     │  0x00007f17b4fd6ecb:   jmp    0x00007f17b4fd6e33
+           ↘      │  0x00007f17b4fd6ed0:   cmp    $0xf4240,%r8d
+             ╭    │  0x00007f17b4fd6ed7:   jge    0x00007f17b4fd6ef1
+             │    │  0x00007f17b4fd6ed9:   add    $0x10,%r9d
+             │    │  0x00007f17b4fd6edd:   data16 xchg %ax,%ax                 ;*lload_1 {reexecute=0 rethrow=0 return_oop=0}
+             │    │                                                            ; - com.rkdeep.LoopUnrollBenchmark::intStride1@10 (line 71)
+             │    │                                                            ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_intStride1_jmhTest::intStride1_thrpt_jmhStub@17 (line 121)
+   0.00%     │↗   │  0x00007f17b4fd6ee0:   add    0x10(%r13,%r9,8),%rsi        ;*ladd {reexecute=0 rethrow=0 return_oop=0}
+             ││   │                                                            ; - com.rkdeep.LoopUnrollBenchmark::intStride1@17 (line 71)
+             ││   │                                                            ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_intStride1_jmhTest::intStride1_thrpt_jmhStub@17 (line 121)
+             ││   │  0x00007f17b4fd6ee5:   inc    %r9d                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
+             ││   │                                                            ; - com.rkdeep.LoopUnrollBenchmark::intStride1@19 (line 69)
+             ││   │                                                            ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_intStride1_jmhTest::intStride1_thrpt_jmhStub@17 (line 121)
+             ││   │  0x00007f17b4fd6ee8:   cmp    $0xf4240,%r9d
+             │╰   │  0x00007f17b4fd6eef:   jl     0x00007f17b4fd6ee0           ;*invokestatic consumeCompiler {reexecute=0 rethrow=0 return_oop=0}
+             │    │                                                            ; - org.openjdk.jmh.infra.Blackhole::consume@7 (line 401)
+             │    │                                                            ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_intStride1_jmhTest::intStride1_thrpt_jmhStub@20 (line 121)
+             ↘    │  0x00007f17b4fd6ef1:   movzbl 0x94(%rax),%r9d              ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
+                  │                                                            ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_intStride1_jmhTest::intStride1_thrpt_jmhStub@30 (line 123)
+   0.02%          │  0x00007f17b4fd6ef9:   mov    0x350(%r15),%r8
+                  │  0x00007f17b4fd6f00:   add    $0x1,%rbx                    ; ImmutableOopMap {rcx=Oop rdi=Oop rax=Oop rbp=Oop }
+                  │                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
+                  │                                                            ; - (reexecute) com.rkdeep.jmh_generated.LoopUnrollBenchmark_intStride1_jmhTest::intStride1_thrpt_jmhStub@33 (line 123)
+                  │  0x00007f17b4fd6f04:   test   %eax,(%r8)                   ;   {poll}
+                  │  0x00007f17b4fd6f07:   test   %r9d,%r9d
+                  │  0x00007f17b4fd6f0a:   jne    0x00007f17b4fd6df2           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
+                  │                                                            ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_intStride1_jmhTest::intStride1_thrpt_jmhStub@36 (line 124)
+   0.00%          │  0x00007f17b4fd6f10:   mov    0xc(%rcx),%r9d               ;*getfield data {reexecute=0 rethrow=0 return_oop=0}
+                  │                                                            ; - com.rkdeep.LoopUnrollBenchmark::intStride1@12 (line 71)
+                  │                                                            ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_intStride1_jmhTest::intStride1_thrpt_jmhStub@17 (line 121)
+   0.01%       ╭  │  0x00007f17b4fd6f14:   mov    0xc(%r12,%r9,8),%r8d         ; implicit exception: dispatches to 0x00007f17b4fd6f3b
+   0.01%       │  │  0x00007f17b4fd6f19:   test   %r8d,%r8d
+               │╭ │  0x00007f17b4fd6f1c:   jbe    0x00007f17b4fd6f3b
+               ││ │  0x00007f17b4fd6f1e:   cmp    $0xf423f,%r8d
+               ││╭│  0x00007f17b4fd6f25:   jbe    0x00007f17b4fd6f3b
+   0.00%       ││││  0x00007f17b4fd6f27:   mov    0x10(%r12,%r9,8),%rsi        ;*laload {reexecute=0 rethrow=0 return_oop=0}
+               ││││                                                            ; - com.rkdeep.LoopUnrollBenchmark::intStride1@16 (line 71)
+               ││││                                                            ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_intStride1_jmhTest::intStride1_thrpt_jmhStub@17 (line 121)
+               ││││  0x00007f17b4fd6f2c:   lea    (%r12,%r9,8),%r13
+               ││││  0x00007f17b4fd6f30:   mov    $0x1,%r9d
+               │││╰  0x00007f17b4fd6f36:   jmp    0x00007f17b4fd6eab           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
+               │││                                                             ; - com.rkdeep.LoopUnrollBenchmark::intStride1@7 (line 69)
+               │││                                                             ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_intStride1_jmhTest::intStride1_thrpt_jmhStub@17 (line 121)
+               ↘↘↘   0x00007f17b4fd6f3b:   mov    $0xffffff76,%esi
+                     0x00007f17b4fd6f40:   mov    %rax,0x40(%rsp)
+                     0x00007f17b4fd6f45:   mov    %rbx,(%rsp)
+....................................................................................................
+  98.24%  <total for region 1>
+
+....[Hottest Regions]...............................................................................
+  98.24%           c2, level 4  com.rkdeep.jmh_generated.LoopUnrollBenchmark_intStride1_jmhTest::intStride1_thrpt_jmhStub, version 4, compile id 699 
+   0.84%     [kernel.kallsyms]  native_write_msr 
+   0.11%     [kernel.kallsyms]  syscall_exit_to_user_mode 
+   0.07%     [kernel.kallsyms]  __entry_text_start 
+   0.04%             libjvm.so  ElfSymbolTable::lookup 
+   0.04%     [kernel.kallsyms]  syscall_return_via_sysret 
+   0.01%     [kernel.kallsyms]  perf_adjust_freq_unthr_context 
+   0.01%     [kernel.kallsyms]  __raw_spin_lock_irqsave 
+   0.01%     [kernel.kallsyms]  account_user_time 
+   0.01%     [kernel.kallsyms]  irqentry_exit_to_user_mode 
+   0.01%     [kernel.kallsyms]  entry_SYSCALL_64_after_hwframe 
+   0.01%             libjvm.so  fileStream::write 
+   0.01%  ld-linux-x86-64.so.2  __tls_get_addr 
+   0.01%     [kernel.kallsyms]  exit_to_user_mode_prepare 
+   0.01%     [kernel.kallsyms]  ktime_get 
+   0.01%     [kernel.kallsyms]  common_nsleep 
+   0.01%     [kernel.kallsyms]  __cgroup_account_cputime_field 
+   0.01%     [kernel.kallsyms]  syscall_enter_from_user_mode 
+   0.01%     [kernel.kallsyms]  mutex_unlock 
+   0.01%     [kernel.kallsyms]  mutex_lock 
+   0.54%  <...other 234 warm regions...>
+....................................................................................................
+ 100.00%  <totals>
+
+....[Hottest Methods (after inlining)]..............................................................
+  98.24%           c2, level 4  com.rkdeep.jmh_generated.LoopUnrollBenchmark_intStride1_jmhTest::intStride1_thrpt_jmhStub, version 4, compile id 699 
+   0.84%     [kernel.kallsyms]  native_write_msr 
+   0.11%     [kernel.kallsyms]  syscall_exit_to_user_mode 
+   0.07%     [kernel.kallsyms]  __entry_text_start 
+   0.06%                        <unknown> 
+   0.05%     [kernel.kallsyms]  syscall_return_via_sysret 
+   0.04%             libjvm.so  ElfSymbolTable::lookup 
+   0.02%     [kernel.kallsyms]  psi_group_change 
+   0.01%     [kernel.kallsyms]  perf_adjust_freq_unthr_context 
+   0.01%             libjvm.so  fileStream::write 
+   0.01%     [kernel.kallsyms]  __raw_spin_lock_irqsave 
+   0.01%     [kernel.kallsyms]  irqentry_exit_to_user_mode 
+   0.01%     [kernel.kallsyms]  account_user_time 
+   0.01%  ld-linux-x86-64.so.2  __tls_get_addr 
+   0.01%     [kernel.kallsyms]  entry_SYSCALL_64_after_hwframe 
+   0.01%     [kernel.kallsyms]  exit_to_user_mode_prepare 
+   0.01%     [kernel.kallsyms]  _raw_read_lock 
+   0.01%     [kernel.kallsyms]  mutex_lock 
+   0.01%     [kernel.kallsyms]  __cgroup_account_cputime_field 
+   0.01%             libjvm.so  os::PlatformMonitor::wait 
+   0.46%  <...other 192 warm methods...>
+....................................................................................................
+ 100.00%  <totals>
+
+....[Distribution by Source]........................................................................
+  98.24%           c2, level 4
+   1.46%     [kernel.kallsyms]
+   0.13%             libjvm.so
+   0.07%             libc.so.6
+   0.06%                      
+   0.02%           interpreter
+   0.01%        hsdis-amd64.so
+   0.01%  ld-linux-x86-64.so.2
+   0.00%          runtime stub
+   0.00%           c1, level 3
+   0.00%                [vdso]
+   0.00%        perf-14063.map
+....................................................................................................
+ 100.00%  <totals>
+
+
+
+# JMH version: 1.37
+# VM version: JDK 17.0.8, OpenJDK 64-Bit Server VM, 17.0.8+7
+# VM invoker: /home/kirill/.sdkman/candidates/java/17.0.8-tem/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.rkdeep.LoopUnrollBenchmark.longStride1
+
+# Run progress: 66.67% complete, ETA 00:01:52
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfAsmProfiler 
+# Profilers consume stdout and stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 2562.905 ops/s
+# Warmup Iteration   2: 2618.714 ops/s
+# Warmup Iteration   3: 2622.058 ops/s
+# Warmup Iteration   4: 2625.958 ops/s
+# Warmup Iteration   5: 2436.138 ops/s
+Iteration   1: 2201.807 ops/s
+Iteration   2: 2163.809 ops/s
+Iteration   3: 2145.369 ops/s
+Iteration   4: 2193.406 ops/s
+Iteration   5: 2189.423 ops/s
+# Processing profiler results: LinuxPerfAsmProfiler 
+
+
+Result "com.rkdeep.LoopUnrollBenchmark.longStride1":
+  2178.763 ±(99.9%) 90.261 ops/s [Average]
+  (min, avg, max) = (2145.369, 2178.763, 2201.807), stdev = 23.440
+  CI (99.9%): [2088.502, 2269.024] (assumes normal distribution)
+
+Secondary result "com.rkdeep.LoopUnrollBenchmark.longStride1:asm":
+PrintAssembly processed: 162561 total address lines.
+Perf output processed (skipped 59.304 seconds):
+ Column 1: cycles (49859 events)
+
+Hottest code regions (>10.00% "cycles" events):
+ Event counts are percents of total event count.
+
+....[Hottest Region 1]..............................................................................
+c2, level 4, com.rkdeep.jmh_generated.LoopUnrollBenchmark_longStride1_jmhTest::longStride1_thrpt_jmhStub, version 4, compile id 687 
+
+                0x00007f5300fd6696:   movslq %r10d,%r10
+                0x00007f5300fd6699:   cmp    %rax,%r10
+                0x00007f5300fd669c:   mov    %ecx,%r11d
+                0x00007f5300fd669f:   cmovg  %esi,%r11d
+                0x00007f5300fd66a3:   mov    %r11d,0x60(%rsp)
+                0x00007f5300fd66a8:   cmp    $0x2,%r11d
+                0x00007f5300fd66ac:   jle    0x00007f5300fd6850
+                0x00007f5300fd66b2:   mov    $0x2,%ecx
+          ╭     0x00007f5300fd66b7:   jmp    0x00007f5300fd6776
+          │     0x00007f5300fd66bc:   nopl   0x0(%rax)
+   0.21%  │ ↗   0x00007f5300fd66c0:   mov    0x60(%rsp),%esi
+   0.01%  │ │   0x00007f5300fd66c4:   mov    0x64(%rsp),%r10d             ;*lload_1 {reexecute=0 rethrow=0 return_oop=0}
+          │ │                                                             ; - com.rkdeep.LoopUnrollBenchmark::longStride1@12 (line 82)
+          │ │                                                             ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_longStride1_jmhTest::longStride1_thrpt_jmhStub@17 (line 121)
+   0.20%  │ │↗  0x00007f5300fd66c9:   vmovd  %xmm5,%r11d
+   8.55%  │ ││  0x00007f5300fd66ce:   cmp    0x50(%rsp),%r11d
+          │╭││  0x00007f5300fd66d3:   jae    0x00007f5300fd67a8
+   0.18%  ││││  0x00007f5300fd66d9:   mov    %r10d,0x64(%rsp)
+   0.06%  ││││  0x00007f5300fd66de:   mov    %esi,0x60(%rsp)
+   0.23%  ││││  0x00007f5300fd66e2:   mov    %r13,%r10
+   8.91%  ││││  0x00007f5300fd66e5:   add    0x10(%r8,%r11,8),%r10
+   0.99%  ││││  0x00007f5300fd66ea:   mov    %r10,%r14
+   0.02%  ││││  0x00007f5300fd66ed:   movslq %ecx,%r10
+   0.23%  ││││  0x00007f5300fd66f0:   mov    %r9,%rbx
+   8.66%  ││││  0x00007f5300fd66f3:   add    %r10,%rbx
+   0.30%  ││││  0x00007f5300fd66f6:   mov    %rdi,%r13
+   0.02%  ││││  0x00007f5300fd66f9:   add    %r10,%r13
+   0.25%  ││││  0x00007f5300fd66fc:   mov    0x48(%r8,%r13,8),%r10
+   9.35%  ││││  0x00007f5300fd6701:   mov    0x40(%r8,%r13,8),%r11
+   0.58%  ││││  0x00007f5300fd6706:   mov    0x38(%r8,%r13,8),%rdx
+   0.30%  ││││  0x00007f5300fd670b:   mov    0x30(%r8,%r13,8),%rsi
+   0.26%  ││││  0x00007f5300fd6710:   mov    0x28(%r8,%r13,8),%rax
+   8.18%  ││││  0x00007f5300fd6715:   mov    0x20(%r8,%r13,8),%rbp
+   0.38%  ││││  0x00007f5300fd671a:   mov    0x18(%r8,%r13,8),%r13        ;*laload {reexecute=0 rethrow=0 return_oop=0}
+          ││││                                                            ; - com.rkdeep.LoopUnrollBenchmark::longStride1@19 (line 82)
+          ││││                                                            ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_longStride1_jmhTest::longStride1_thrpt_jmhStub@17 (line 121)
+   0.28%  ││││  0x00007f5300fd671f:   add    %r13,%r14
+   0.34%  ││││  0x00007f5300fd6722:   mov    %r14,%r13
+   8.32%  ││││  0x00007f5300fd6725:   add    %rbp,%r13
+   0.45%  ││││  0x00007f5300fd6728:   mov    %r13,%rbp
+   0.26%  ││││  0x00007f5300fd672b:   add    %rax,%rbp
+   0.45%  ││││  0x00007f5300fd672e:   mov    %rbp,%rax
+   8.21%  ││││  0x00007f5300fd6731:   add    %rsi,%rax
+   0.61%  ││││  0x00007f5300fd6734:   mov    %rax,%rsi
+   0.22%  ││││  0x00007f5300fd6737:   add    %rdx,%rsi
+   0.62%  ││││  0x00007f5300fd673a:   mov    %rsi,%rdx
+   8.62%  ││││  0x00007f5300fd673d:   add    %r11,%rdx
+   1.65%  ││││  0x00007f5300fd6740:   mov    %rdx,%r11
+   0.09%  ││││  0x00007f5300fd6743:   add    %r10,%r11                    ;*ladd {reexecute=0 rethrow=0 return_oop=0}
+          ││││                                                            ; - com.rkdeep.LoopUnrollBenchmark::longStride1@20 (line 82)
+          ││││                                                            ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_longStride1_jmhTest::longStride1_thrpt_jmhStub@17 (line 121)
+   2.21%  ││││  0x00007f5300fd6746:   mov    %r11,%r13
+   8.89%  ││││  0x00007f5300fd6749:   add    $0x8,%rbx
+   0.17%  ││││  0x00007f5300fd674d:   mov    %ebx,%r11d                   ;*l2i {reexecute=0 rethrow=0 return_oop=0}
+          ││││                                                            ; - com.rkdeep.LoopUnrollBenchmark::longStride1@18 (line 82)
+          ││││                                                            ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_longStride1_jmhTest::longStride1_thrpt_jmhStub@17 (line 121)
+   0.02%  ││││  0x00007f5300fd6750:   vmovd  %r11d,%xmm5
+   0.25%  ││││  0x00007f5300fd6755:   add    $0x8,%ecx
+   8.86%  ││││  0x00007f5300fd6758:   cmp    0x64(%rsp),%ecx
+          ││╰│  0x00007f5300fd675c:   jl     0x00007f5300fd66c0           ;*ifge {reexecute=0 rethrow=0 return_oop=0}
+          ││ │                                                            ; - com.rkdeep.LoopUnrollBenchmark::longStride1@9 (line 80)
+          ││ │                                                            ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_longStride1_jmhTest::longStride1_thrpt_jmhStub@17 (line 121)
+   0.00%  ││ │  0x00007f5300fd6762:   mov    0x350(%r15),%r10             ; ImmutableOopMap {r8=Oop xmm0=Oop xmm1=Oop xmm2=Oop xmm4=NarrowOop [88]=Oop }
+          ││ │                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
+          ││ │                                                            ; - (reexecute) com.rkdeep.LoopUnrollBenchmark::longStride1@26 (line 80)
+          ││ │                                                            ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_longStride1_jmhTest::longStride1_thrpt_jmhStub@17 (line 121)
+   0.15%  ││ │  0x00007f5300fd6769:   test   %eax,(%r10)                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
+          ││ │                                                            ; - com.rkdeep.LoopUnrollBenchmark::longStride1@26 (line 80)
+          ││ │                                                            ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_longStride1_jmhTest::longStride1_thrpt_jmhStub@17 (line 121)
+          ││ │                                                            ;   {poll}
+   0.14%  ││ │  0x00007f5300fd676c:   cmp    0x60(%rsp),%ecx
+          ││ │  0x00007f5300fd6770:   jge    0x00007f5300fd6855           ;*lload_1 {reexecute=0 rethrow=0 return_oop=0}
+          ││ │                                                            ; - com.rkdeep.LoopUnrollBenchmark::longStride1@12 (line 82)
+          ││ │                                                            ; - com.rkdeep.jmh_generated.LoopUnrollBenchmark_longStride1_jmhTest::longStride1_thrpt_jmhStub@17 (line 121)
+          ↘│ │  0x00007f5300fd6776:   mov    0x60(%rsp),%r10d
+           │ │  0x00007f5300fd677b:   sub    %ecx,%r10d
+           │ │  0x00007f5300fd677e:   mov    0x60(%rsp),%esi
+   0.01%   │ │  0x00007f5300fd6782:   xor    %r11d,%r11d
+           │ │  0x00007f5300fd6785:   cmp    %ecx,%esi
+           │ │  0x00007f5300fd6787:   cmovl  %r11d,%r10d
+   0.01%   │ │  0x00007f5300fd678b:   cmp    $0x1f40,%r10d
+           │ │  0x00007f5300fd6792:   mov    $0x1f40,%ebx
+           │ │  0x00007f5300fd6797:   cmova  %ebx,%r10d
+   0.01%   │ │  0x00007f5300fd679b:   add    %ecx,%r10d
+   0.00%   │ ╰  0x00007f5300fd679e:   jmp    0x00007f5300fd66c9
+           │    0x00007f5300fd67a3:   mov    $0x1,%ecx
+           ↘    0x00007f5300fd67a8:   movslq %ecx,%r11
+                0x00007f5300fd67ab:   add    %r9,%r11
+                0x00007f5300fd67ae:   vmovd  %xmm5,%r10d
+                0x00007f5300fd67b3:   vmovq  %xmm1,%rbp
+                0x00007f5300fd67b8:   mov    0x58(%rsp),%r8
+                0x00007f5300fd67bd:   mov    %r8,0x50(%rsp)
+                0x00007f5300fd67c2:   vmovsd %xmm2,(%rsp)
+                0x00007f5300fd67c7:   vmovsd %xmm0,0x8(%rsp)
+                0x00007f5300fd67cd:   vmovsd %xmm3,0x10(%rsp)
+....................................................................................................
+  98.71%  <total for region 1>
+
+....[Hottest Regions]...............................................................................
+  98.71%           c2, level 4  com.rkdeep.jmh_generated.LoopUnrollBenchmark_longStride1_jmhTest::longStride1_thrpt_jmhStub, version 4, compile id 687 
+   0.21%     [kernel.kallsyms]  syscall_exit_to_user_mode 
+   0.10%     [kernel.kallsyms]  __entry_text_start 
+   0.07%     [kernel.kallsyms]  native_write_msr 
+   0.06%     [kernel.kallsyms]  syscall_return_via_sysret 
+   0.05%             libjvm.so  ElfSymbolTable::lookup 
+   0.02%     [kernel.kallsyms]  mutex_unlock 
+   0.01%     [kernel.kallsyms]  perf_adjust_freq_unthr_context 
+   0.01%     [kernel.kallsyms]  irqentry_exit_to_user_mode 
+   0.01%     [kernel.kallsyms]  __rcu_read_unlock 
+   0.01%     [kernel.kallsyms]  asm_sysvec_apic_timer_interrupt 
+   0.01%           c2, level 4  com.rkdeep.jmh_generated.LoopUnrollBenchmark_longStride1_jmhTest::longStride1_thrpt_jmhStub, version 4, compile id 687 
+   0.01%           c2, level 4  com.rkdeep.jmh_generated.LoopUnrollBenchmark_longStride1_jmhTest::longStride1_thrpt_jmhStub, version 4, compile id 687 
+   0.01%             libjvm.so  fileStream::write 
+   0.01%     [kernel.kallsyms]  __raw_spin_lock_irqsave 
+   0.01%             libc.so.6  clock_gettime@@GLIBC_2.17 
+   0.01%     [kernel.kallsyms]  __task_pid_nr_ns 
+   0.01%                        <unknown> 
+   0.01%     [kernel.kallsyms]  exit_to_user_mode_prepare 
+   0.01%     [kernel.kallsyms]  do_syscall_64 
+   0.63%  <...other 269 warm regions...>
+....................................................................................................
+ 100.00%  <totals>
+
+....[Hottest Methods (after inlining)]..............................................................
+  98.74%           c2, level 4  com.rkdeep.jmh_generated.LoopUnrollBenchmark_longStride1_jmhTest::longStride1_thrpt_jmhStub, version 4, compile id 687 
+   0.21%     [kernel.kallsyms]  syscall_exit_to_user_mode 
+   0.10%     [kernel.kallsyms]  __entry_text_start 
+   0.08%                        <unknown> 
+   0.07%     [kernel.kallsyms]  native_write_msr 
+   0.06%     [kernel.kallsyms]  syscall_return_via_sysret 
+   0.05%             libjvm.so  ElfSymbolTable::lookup 
+   0.02%     [kernel.kallsyms]  mutex_unlock 
+   0.01%     [kernel.kallsyms]  irqentry_exit_to_user_mode 
+   0.01%     [kernel.kallsyms]  perf_adjust_freq_unthr_context 
+   0.01%             libjvm.so  fileStream::write 
+   0.01%     [kernel.kallsyms]  asm_sysvec_apic_timer_interrupt 
+   0.01%     [kernel.kallsyms]  __rcu_read_unlock 
+   0.01%             libc.so.6  __vfprintf_internal 
+   0.01%             libc.so.6  clock_gettime@@GLIBC_2.17 
+   0.01%     [kernel.kallsyms]  __task_pid_nr_ns 
+   0.01%     [kernel.kallsyms]  __raw_spin_lock_irqsave 
+   0.01%           interpreter  method entry point (kind = zerolocals)  
+   0.01%             libjvm.so  event_to_env 
+   0.01%     [kernel.kallsyms]  exit_to_user_mode_prepare 
+   0.52%  <...other 207 warm methods...>
+....................................................................................................
+ 100.00%  <totals>
+
+....[Distribution by Source]........................................................................
+  98.75%           c2, level 4
+   0.89%     [kernel.kallsyms]
+   0.17%             libjvm.so
+   0.08%                      
+   0.07%             libc.so.6
+   0.02%           interpreter
+   0.01%                [vdso]
+   0.01%  ld-linux-x86-64.so.2
+   0.00%        hsdis-amd64.so
+   0.00%                kvm.ko
+....................................................................................................
+ 100.00%  <totals>
+
+
+
+# Run complete. Total time: 00:05:35
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                             Mode  Cnt           Score          Error  Units
+LoopUnrollBenchmark.baseline         thrpt    5  1962183595.952 ± 11096327.441  ops/s
+LoopUnrollBenchmark.baseline:asm     thrpt                  NaN                   ---
+LoopUnrollBenchmark.intStride1       thrpt    5        2579.128 ±        6.448  ops/s
+LoopUnrollBenchmark.intStride1:asm   thrpt                  NaN                   ---
+LoopUnrollBenchmark.longStride1      thrpt    5        2178.763 ±       90.261  ops/s
+LoopUnrollBenchmark.longStride1:asm  thrpt                  NaN                   ---

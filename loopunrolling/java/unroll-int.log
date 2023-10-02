@@ -1,0 +1,177 @@
+CompileCommand: print com/rkdeep/LoopUnroll.intStride1 bool print = true
+
+============================= C2-compiled nmethod ==============================
+----------------------------------- Assembly -----------------------------------
+
+Out
+Compiled method (c2)     104   80 %     4       com.rkdeep.LoopUnroll::intStride1-4768923247354483807
+ @ 4 (27 bytes)
+ total in heap  [0x00007faa40fa4d90,0x00007faa40fa5188] = 1016
+ relocation     [0x00007faa40fa4ef0,0x00007faa40fa4f08] = 24
+ main code      [0x00007faa40fa4f20,0x00007faa40fa50a0] = 384
+ stub code      [0x00007faa40fa50a0,0x00007faa40fa50b8] = 24
+ oops           [0x00007faa40fa50b8,0x00007faa40fa50c0] = 8
+ metadata       [0x00007faa40fa50c0,0x00007faa40fa50c8] = 8
+ scopes data    [0x00007faa40fa50c8,0x00007faa40fa5110] = 72
+ scopes pcs     [0x00007faa40fa5110,0x00007faa40fa5170] = 96
+ dependencies   [0x00007faa40fa5170,0x00007faa40fa5178] = 8
+ nul chk table  [0x00007faa40fa5178,0x00007faa40fa5188] = 16
+
+--------------------------------------------------------------------------------
+[Constant Pool (empty)]
+
+--------------------------------------------------------------------------------
+
+[Verified Entry Point]
+  # {method} {0x00007fa920400528} 'intStride1' '()J' in 'com/rkdeep/LoopUnroll'
+  0x00007faa40fa4f20:   call   0x00007faa56e19100           ;   {runtime_call os::breakpoint()}
+  0x00007faa40fa4f25:   data16 data16 nop WORD PTR [rax+rax*1+0x0]
+  0x00007faa40fa4f30:   mov    DWORD PTR [rsp-0x14000],eax
+  0x00007faa40fa4f37:   push   rbp
+  0x00007faa40fa4f38:   sub    rsp,0x30
+  0x00007faa40fa4f3c:   mov    r12,QWORD PTR [rsi+0x8]
+  0x00007faa40fa4f40:   mov    ebx,DWORD PTR [rsi]
+  0x00007faa40fa4f42:   mov    rdi,rsi
+  0x00007faa40fa4f45:   movabs r10,0x7faa56ed6bc0
+  0x00007faa40fa4f4f:   call   r10
+  0x00007faa40fa4f52:   movabs r11,0x7fa951934828           ;   {oop(a 'java/lang/Class'{0x00007fa951934828} = 'com/rkdeep/LoopUnroll')}
+  // POINTER DATA ARRAY
+  0x00007faa40fa4f5c:   mov    rdi,QWORD PTR [r11+0xb0]
+  //  MOVE SIZE OF data ARRAY INTO r10d
+  0x00007faa40fa4f63:   mov    r10d,DWORD PTR [rdi+0xc]     ; implicit exception: dispatches to 0x00007faa40fa5078
+  // MOVE MAX INTO ecx
+  0x00007faa40fa4f67:   mov    ecx,DWORD PTR [r11+0xb8]
+  0x00007faa40fa4f6e:   cmp    ebx,ecx
+  0x00007faa40fa4f70:   jge    0x00007faa40fa5048
+  0x00007faa40fa4f76:   mov    r8d,ebx
+  0x00007faa40fa4f79:   inc    r8d
+  0x00007faa40fa4f7c:   xor    r11d,r11d
+  0x00007faa40fa4f7f:   test   r8d,r8d
+  0x00007faa40fa4f82:   cmovl  r8d,r11d
+  0x00007faa40fa4f86:   cmp    r8d,ecx
+  0x00007faa40fa4f89:   cmovg  r8d,ecx
+  0x00007faa40fa4f8d:   cmp    ebx,r10d
+  0x00007faa40fa4f90:   jae    0x00007faa40fa5060
+  0x00007faa40fa4f96:   add    r12,QWORD PTR [rdi+rbx*8+0x10]
+  0x00007faa40fa4f9b:   inc    ebx
+  0x00007faa40fa4f9d:   cmp    ebx,r8d
+  0x00007faa40fa4fa0:   jl     0x00007faa40fa4f8d
+  0x00007faa40fa4fa2:   movsxd r8,r10d
+  0x00007faa40fa4fa5:   movsxd r9,ecx
+  0x00007faa40fa4fa8:   cmp    r9,r8
+  0x00007faa40fa4fab:   mov    edx,ecx
+  0x00007faa40fa4fad:   cmovg  edx,r10d
+  0x00007faa40fa4fb1:   mov    r9d,edx
+  0x00007faa40fa4fb4:   add    r9d,0xfffffff9
+  0x00007faa40fa4fb8:   mov    esi,0x80000000
+  0x00007faa40fa4fbd:   cmp    edx,r9d
+  0x00007faa40fa4fc0:   cmovl  r9d,esi
+  0x00007faa40fa4fc4:   cmp    ebx,r9d
+  0x00007faa40fa4fc7:   jge    0x00007faa40fa5034
+  // UNROLL BY 8000
+  0x00007faa40fa4fc9:   mov    r8d,0x1f40
+  0x00007faa40fa4fcf:   jmp    0x00007faa40fa4fdf
+  0x00007faa40fa4fd1:   mov    rdx,QWORD PTR [r15+0x350]    ; ImmutableOopMap {rdi=Oop }
+                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) com.rkdeep.LoopUnroll::intStride1@22 (line 22)
+  // SAFEPOINT POLL
+  0x00007faa40fa4fd8:   test   DWORD PTR [rdx],eax          ;   {poll}
+  0x00007faa40fa4fda:   cmp    ebx,r9d
+  0x00007faa40fa4fdd:   jge    0x00007faa40fa5034
+  0x00007faa40fa4fdf:   mov    edx,r9d
+  0x00007faa40fa4fe2:   sub    edx,ebx
+  0x00007faa40fa4fe4:   cmp    r9d,ebx
+  0x00007faa40fa4fe7:   cmovl  edx,r11d
+  // COMPARE OUTER LOOP (loop strip mining)
+  0x00007faa40fa4feb:   cmp    edx,0x1f40
+  0x00007faa40fa4ff1:   cmova  edx,r8d   
+  0x00007faa40fa4ff5:   add    edx,ebx
+  
+//==============================
+// MAIN LOOP START (UNROLLED SECTION)
+// PERFORMS 8 ADDITIONS PER LOOP ITERATION
+//==============================
+  0x00007faa40fa4ff7:   nop    WORD PTR [rax+rax*1+0x0]
+  0x00007faa40fa5000:   add    r12,QWORD PTR [rdi+rbx*8+0x10]
+  0x00007faa40fa5005:   movsxd rsi,ebx
+  0x00007faa40fa5008:   add    r12,QWORD PTR [rdi+rsi*8+0x18]
+  0x00007faa40fa500d:   add    r12,QWORD PTR [rdi+rsi*8+0x20]
+  0x00007faa40fa5012:   add    r12,QWORD PTR [rdi+rsi*8+0x28]
+  0x00007faa40fa5017:   add    r12,QWORD PTR [rdi+rsi*8+0x30]
+  0x00007faa40fa501c:   add    r12,QWORD PTR [rdi+rsi*8+0x38]
+  0x00007faa40fa5021:   add    r12,QWORD PTR [rdi+rsi*8+0x40]
+  0x00007faa40fa5026:   add    r12,QWORD PTR [rdi+rsi*8+0x48]
+  // INCREMENT LOOP COUNTER BY 8
+  0x00007faa40fa502b:   add    ebx,0x8
+  // COMPARE WITH MAX UNROLL BY 1000*8
+  0x00007faa40fa502e:   cmp    ebx,edx 
+  0x00007faa40fa5030:   jl     0x00007faa40fa5000
+  0x00007faa40fa5032:   jmp    0x00007faa40fa4fd1
+  0x00007faa40fa5034:   cmp    ebx,ecx
+  0x00007faa40fa5036:   jge    0x00007faa40fa5048
+  0x00007faa40fa5038:   cmp    ebx,r10d
+  0x00007faa40fa503b:   jae    0x00007faa40fa5060
+  0x00007faa40fa503d:   add    r12,QWORD PTR [rdi+rbx*8+0x10]
+  0x00007faa40fa5042:   inc    ebx
+  0x00007faa40fa5044:   cmp    ebx,ecx
+  0x00007faa40fa5046:   jl     0x00007faa40fa5038
+  0x00007faa40fa5048:   mov    esi,0xffffff45
+  0x00007faa40fa504d:   mov    rbp,r12
+  0x00007faa40fa5050:   mov    DWORD PTR [rsp+0x4],ebx
+  0x00007faa40fa5054:   mov    DWORD PTR [rsp+0x8],ecx
+  0x00007faa40fa5058:   data16 xchg ax,ax
+  0x00007faa40fa505b:   call   0x00007faa408b5600           ; ImmutableOopMap {}
+                                                            ;*if_icmpge {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) com.rkdeep.LoopUnroll::intStride1@8 (line 22)
+                                                            ;   {runtime_call UncommonTrapBlob}
+  0x00007faa40fa5060:   mov    esi,0xffffffe4
+  0x00007faa40fa5065:   mov    QWORD PTR [rsp],r12
+  0x00007faa40fa5069:   mov    QWORD PTR [rsp+0x8],rdi
+  0x00007faa40fa506e:   mov    DWORD PTR [rsp+0x10],ebx
+  0x00007faa40fa5072:   nop
+  0x00007faa40fa5073:   call   0x00007faa408b5600           ; ImmutableOopMap {[8]=Oop }
+                                                            ;*laload {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - com.rkdeep.LoopUnroll::intStride1@16 (line 24)
+                                                            ;   {runtime_call UncommonTrapBlob}
+  0x00007faa40fa5078:   mov    esi,0xffffff76
+  0x00007faa40fa507d:   mov    rbp,r12
+  0x00007faa40fa5080:   mov    DWORD PTR [rsp],ebx
+  0x00007faa40fa5083:   call   0x00007faa408b5600           ; ImmutableOopMap {}
+                                                            ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - com.rkdeep.LoopUnroll::intStride1@4 (line 22)
+                                                            ;   {runtime_call UncommonTrapBlob}
+  0x00007faa40fa5088:   hlt    
+  0x00007faa40fa5089:   hlt    
+  0x00007faa40fa508a:   hlt    
+  0x00007faa40fa508b:   hlt    
+  0x00007faa40fa508c:   hlt    
+  0x00007faa40fa508d:   hlt    
+  0x00007faa40fa508e:   hlt    
+  0x00007faa40fa508f:   hlt    
+  0x00007faa40fa5090:   hlt    
+  0x00007faa40fa5091:   hlt    
+  0x00007faa40fa5092:   hlt    
+  0x00007faa40fa5093:   hlt    
+  0x00007faa40fa5094:   hlt    
+  0x00007faa40fa5095:   hlt    
+  0x00007faa40fa5096:   hlt    
+  0x00007faa40fa5097:   hlt    
+  0x00007faa40fa5098:   hlt    
+  0x00007faa40fa5099:   hlt    
+  0x00007faa40fa509a:   hlt    
+  0x00007faa40fa509b:   hlt    
+  0x00007faa40fa509c:   hlt    
+  0x00007faa40fa509d:   hlt    
+  0x00007faa40fa509e:   hlt    
+  0x00007faa40fa509f:   hlt    
+[Exception Handler]
+  0x00007faa40fa50a0:   jmp    0x00007faa40950c80           ;   {no_reloc}
+[Deopt Handler Code]
+  0x00007faa40fa50a5:   call   0x00007faa40fa50aa
+  0x00007faa40fa50aa:   sub    QWORD PTR [rsp],0x5
+  0x00007faa40fa50af:   jmp    0x00007faa408b59a0           ;   {runtime_call DeoptimizationBlob}
+  0x00007faa40fa50b4:   hlt    
+  0x00007faa40fa50b5:   hlt    
+  0x00007faa40fa50b6:   hlt    
+  0x00007faa40fa50b7:   hlt    
+--------------------------------------------------------------------------------
